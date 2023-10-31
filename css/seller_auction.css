@@ -1,0 +1,459 @@
+/* ===== Google Font Import - Poppins ===== */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600&display=swap');
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+:root{
+    --lightblue:#1882f2;
+    --dark: #11101d;
+    --light: #E4E9F7;
+    --red: rgb(190, 78, 78);
+    --charoal: #424B54;
+    --gray: #c6bfbf;
+    --crim: #fbd0d9;
+    --pure: crimson;
+}
+
+:root{  
+    /* ====== Transition ====== */
+    --tran-05: all 0.5s ease;
+    --tran-03: all 0.3s ease;
+    --tran-03: all 0.2s ease;
+}
+
+body{
+    min-height: 100vh;
+    background-color: var(--light);
+}
+
+nav{
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 250px;
+    padding: 10px 14px;
+    background-color: var(--dark);
+    border-right: 1px solid var(--charoal);
+    transition: var(--tran-05);
+}
+
+nav.close{
+    width: 73px;
+}
+
+nav .logo-name{
+    display: flex;
+    align-items: center;
+}
+
+nav .logo-image{
+    display: flex;
+    justify-content: center;
+    min-width: 45px;
+}
+
+nav .logo-image .hehe{
+    font-size: 30px;
+    font-weight: bold;
+    color: var(--pure);
+
+}
+
+nav .logo-image img{
+    width: 40px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+nav .logo-name .logo_name{
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--light);
+    padding-top: 2px;
+    margin-left: 14px;
+    transition: var(--tran-05);
+}
+
+nav.close .logo_name{
+    opacity: 0;
+    pointer-events: none;
+}
+
+.hehe{
+    size: 50rem;
+}
+
+nav .menu-items{
+    margin-top: 40px;
+    height: calc(100% - 90px);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.menu-items li{
+    list-style: none;
+}
+
+.menu-items li a{
+    display: flex;
+    align-items: center;
+    height: 50px;
+    text-decoration: none;
+    position: relative;
+}
+
+.nav-links li a:hover:before{
+    content: "";
+    position: absolute;
+    left: -7px;
+    height: 5px;
+    width: 5px;
+    border-radius: 50%;
+    background-color: var(--red);
+}
+
+body.dark li a:hover:before{
+    background-color: var(--red);
+}
+
+.menu-items li a i{
+    font-size: 24px;
+    min-width: 45px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--light);
+}
+
+.menu-items li a .link-name{
+    font-size: 18px;
+    font-weight: 400;
+    color: var(--light);    
+    transition: var(--tran-05);
+}
+
+nav.close li a .link-name{
+    opacity: 0;
+    pointer-events: none;
+}
+
+.nav-links li a:hover i,
+.nav-links li a:hover .link-name{
+    color: var(--red);
+}
+
+body.dark .nav-links li a:hover i,
+body.dark .nav-links li a:hover .link-name{
+    color: var(--red);
+}
+
+.menu-items .logout-mode{
+      display: inline-block;
+    padding-top: 10px;
+    border-top: 1px solid var(--charoal);
+}
+
+.menu-items .mode{
+    display: inline-block;
+    align-items: center;
+    white-space: nowrap;
+}
+
+.menu-items .mode-toggle{
+    position: absolute;
+    right: 14px;
+    height: 50px;
+    min-width: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.dashboard{
+    position: relative;
+    left: 250px;
+    background-color: var(--light);
+    min-height: 100vh;
+    width: calc(100% - 250px);
+    padding: 10px 14px;
+    transition: var(--tran-05);
+}
+nav.close ~ .dashboard{
+    left: 73px;
+    width: calc(100% - 73px);
+}
+.dashboard .top{
+    position: fixed;
+    top: 0;
+    left: 250px;
+    display: flex;
+    width: calc(100% - 250px);
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 14px;
+    background-color: var(--dark);
+    transition: var(--tran-05);
+    z-index: 10;
+}
+nav.close ~ .dashboard .top{
+    left: 73px;
+    width: calc(100% - 73px);
+}
+.dashboard .top .sidebar-toggle{
+    font-size: 26px;
+    color: var(--light);
+    cursor: pointer;
+}
+.dashboard .top .search-box{
+    position: relative;
+    height: 45px;
+    max-width: 600px;
+    width: 100%;
+    margin: 0 30px;
+}
+.top .search-box input{
+    position: absolute;
+    border: 1px solid var(--dark);
+    background-color: var(--light);
+    padding: 0 25px 0 50px;
+    border-radius: 5px;
+    height: 100%;
+    width: 100%;
+    color: var(--charoal);
+    font-size: 15px;
+    font-weight: 400;
+    outline: none;
+}
+.top .search-box i{
+    position: absolute;
+    left: 15px;
+    font-size: 22px;
+    z-index: 10;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--dark);
+}
+.top img{
+    width: 40px;
+    border-radius: 50%;
+}
+
+.row {
+    margin-top: 7%;
+}
+
+.column1 {
+    float: left;
+    width: 25%;
+    padding: 10px;
+    height: 600px; /* Should be removed. Only for demonstration */
+    border: 2px solid var(--dark);
+    justify-items: center;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+
+.column1 h2 {
+    text-align: left;
+    margin-left: 9px;
+}
+
+.ohayo{
+    text-align: left;
+    margin-left: 9px;
+    margin-top: 10%;
+}
+
+#bid {
+    margin-left: 9px;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.bakit {
+    margin-top: 15px;
+}
+
+#btn{
+    padding: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.column1 form {
+    position: relative;
+    margin-left: 3.2%;
+    margin-top: 5%;
+}
+
+.column1 form .form-group {
+    margin-top: 5px;
+}
+
+.column1 form .form-group input{
+    padding: 5px;
+    width: 245px;
+    border-radius: 5px;
+}
+
+.column2 {
+    float: left;
+    width: 50%;
+    height: 600px; /* Should be removed. Only for demonstration */
+    padding: 0 5px 0;
+}
+
+.bott {
+    padding: 5px;
+    margin-top: 5px;
+}
+
+table{
+    width: 100%;
+}
+
+.viewing{
+    height: 60%;
+    padding: 10px;
+    border: 2px solid var(--dark);
+    border-radius: 5px;
+}
+
+
+
+  .column3 {
+    float: right;
+    width: 25%;
+    padding: 10px;
+    height: 600px;
+    border: 2px solid var(--dark);
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+  }
+  
+  /* Clear floats after the columns */
+  .row:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+
+
+@media (max-width: 1000px) {
+    nav{
+        width: 73px;
+    }
+    nav.close{
+        width: 250px;
+    }
+    nav .logo_name{
+        opacity: 0;
+        pointer-events: none;
+    }
+    nav.close .logo_name{
+        opacity: 1;
+        pointer-events: auto;
+    }
+    nav li a .link-name{
+        opacity: 0;
+        pointer-events: none;
+    }
+    nav.close li a .link-name{
+        opacity: 1;
+        pointer-events: auto;
+    }
+    nav ~ .dashboard{
+        left: 73px;
+        width: calc(100% - 73px);
+    }
+    nav.close ~ .dashboard{
+        left: 250px;
+        width: calc(100% - 250px);
+    }
+    nav ~ .dashboard .top{
+        left: 73px;
+        width: calc(100% - 73px);
+    }
+    nav.close ~ .dashboard .top{
+        left: 250px;
+        width: calc(100% - 250px);
+    }
+    .activity .activity-data{
+        overflow-X: scroll;
+    }
+    .container{
+        margin-top: 20%;
+    }
+    nav.close ~ .column1 form {
+        margin-left: 50%;
+    }
+}
+
+@media (max-width: 780px) {
+    .dash-content .boxes .box{
+        width: calc(100% / 2 - 15px);
+        margin-top: 15px;
+    }
+}
+@media (max-width: 560px) {
+    .dash-content .boxes .box{
+        width: 100% ;
+    }
+    .container{
+        margin-top: 20%;
+    }
+}
+@media (max-width: 400px) {
+    nav{
+        width: 0px;
+    }
+    nav.close{
+        width: 73px;
+    }
+    nav .logo_name{
+        opacity: 0;
+        pointer-events: none;
+    }
+    nav.close .logo_name{
+        opacity: 0;
+        pointer-events: none;
+    }
+    nav li a .link-name{
+        opacity: 0;
+        pointer-events: none;
+    }
+    nav.close li a .link-name{
+        opacity: 0;
+        pointer-events: none;
+    }
+    nav ~ .dashboard{
+        left: 0;
+        width: 100%;
+    }
+    nav.close ~ .dashboard{
+        left: 73px;
+        width: calc(100% - 73px);
+    }
+    nav ~ .dashboard .top{
+        left: 0;
+        width: 100%;
+    }
+    nav.close ~ .dashboard .top{
+        left: 0;
+        width: 100%;
+    }
+    .container{
+        margin-top: 30%;
+    }
+}
+
+
+
