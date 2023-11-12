@@ -129,7 +129,7 @@
                             <a href="admin_report.php">Show Form</a>
                         </div>
 						<?php if(!empty($commissions)) :?>
-						<div class="card-body">
+						<div class="card-body mb-5">
 							<div style="height: 600px;">
 								<h4>Net Commission Chart</h4>
 								<canvas id="myBar"></canvas>

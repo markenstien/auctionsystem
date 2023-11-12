@@ -94,7 +94,7 @@
                             <?php if(empty($commissions)) :?>
                                 <p>No Commissions Found.</p>
                             <?php else:?>
-                                <div class="card-body">
+                                <div class="card-body card-body mb-5">
                                     <div style="height: 600px;">
                                         <h4>Net Commission Chart</h4>
                                         <canvas id="myBar"></canvas>

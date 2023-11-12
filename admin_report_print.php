@@ -142,6 +142,7 @@
                         <td>Bid Winner</td>
                         <td>Sell Price</td>
                         <td>Sold Price</td>
+                        <td>Commission</td>
                         <th>Remarks</th>
                     </tr>
 
@@ -152,9 +153,10 @@
                             <td><?php echo $row['bidder_name']?></td>
                             <td><?php echo number_format($row['selling_price'], 2)?></td>
                             <td><?php echo number_format($row['bid_amount'],2)?></td>
+                            <td><?php echo number_format($row['net_amount'],2)?> (<?php echo  ($row['net_amount']/$row['bid_amount']) * 100?>%)</td>
                             <td><?php
                                 $percentage = (100 - ($row['selling_price'] / $row['bid_amount']) * 100);
-                                echo $percentage;
+                                echo ceil($percentage);
                                 if($percentage > 0) {
                                     echo ' Increase ';
                                 } elseif($percentage < 0) {
@@ -192,6 +194,7 @@
                 <td>Bid Winner</td>
                 <td>Sell Price</td>
                 <td>Sold Price</td>
+                <td>Commission</td>
                 <th>Remarks</th>
             </tr>
 
@@ -202,9 +205,10 @@
                     <td><?php echo $row['bidder_name']?></td>
                     <td><?php echo number_format($row['selling_price'], 2)?></td>
                     <td><?php echo number_format($row['bid_amount'],2)?></td>
+                    <td><?php echo number_format($row['net_amount'],2)?></td>
                     <td><?php
                         $percentage = (100 - ($row['selling_price'] / $row['bid_amount']) * 100);
-                        echo $percentage;
+                        echo ceil($percentage);
                         if($percentage > 0) {
                             echo ' Increase ';
                         } elseif($percentage < 0) {
