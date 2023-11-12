@@ -162,7 +162,7 @@ button {
                     
                     $actual_link = $_SERVER['SERVER_NAME'].$_SERVER['PHP_SELF'];
                     $explode = explode('/',$actual_link);
-                    $newLink = 'http://'.$explode[0].'/'.$explode[1].'/live-api';
+                    $newLink = 'http://'.$explode[0].'/'.$explode[1].'/EZauction/live-api';
                 ?>
                 <iframe src="<?=$newLink?>" style="width: 100%; height: 338px;" frameborder="0"></iframe>
                 </div>

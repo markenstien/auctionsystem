@@ -5,7 +5,7 @@
     require 'functions/functions.php';
 	require_once 'libraries/vendor/autoload.php';
 
-    $adminPercetangeCut = 23; //cut is 23 percent per sale
+    $adminPercetangeCut = 0.23; //cut is 23 percent per sale
     $dateTime = date('Y-m-d H:i:s');
     $req = $_GET;
 
@@ -61,7 +61,7 @@
             $amount = $bidWinner['bid_amount'];
             $amounInText = number_format($amount, 2);
             //compute admin cut
-            $adminCut = ($adminPercetangeCut/$amount) * 100;
+            $adminCut = ($amount * $adminPercetangeCut);
             $adminCutIntext = number_format($adminCut, 2);
             //final amount that will receive by the seller
             $netAmount = $amount - $adminCut;
@@ -80,6 +80,7 @@
                     external_reference,
                     bidder_id,
                     seller_id,
+                    livestock_id,
                     date_time
                 ) VALUES(
                     '{$amount}',
@@ -89,6 +90,7 @@
                     '{$externalReference}',
                     '{$bidder['id']}',
                     '{$seller['id']}',
+                    '{$liveStockId}',
                     '{$dateTime}'
                 )
             ";

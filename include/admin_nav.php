@@ -45,6 +45,12 @@
             </a>
         </li>
         <li>
+            <a href="admin_report.php">
+                <i class='bx bx-user-circle'></i>
+                <span class="link-name">Reports</span>
+            </a>
+        </li>
+        <li>
             <a href="#">
                 <i class='bx bx-cog' ></i>
                 <span class="link-name">Settings</span>

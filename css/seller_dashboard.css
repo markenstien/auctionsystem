@@ -95,9 +95,11 @@ nav .menu-items{
     flex-direction: column;
     justify-content: space-between;
 }
-
+nav li {
+    list-style: none !important;
+}
 .menu-items li{
-    list-style: none;
+    list-style: none !important;
 }
 
 .menu-items li a{

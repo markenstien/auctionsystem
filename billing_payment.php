@@ -82,6 +82,7 @@
 						<th scope="col">Address</th>
 						<th scope="col">Contact</th>
 						<th scope="col">Amount</th>
+						<th>Status</th>
 					</tr>
 				</thead>
 
@@ -124,6 +125,7 @@
 							<td><?=  ucwords($row['address']) ?></td>
 							<td><?=  ucwords($row['phone']) ?></td>
 							<td>P <?=number_format($row["winnerAmmount"]); ?></td>
+							<td><?php echo ($row['bid_status'] == 5) ? 'PAID': 'UNPAID'?></td>
 						</tr>
 					<?php
 						}
@@ -137,7 +139,7 @@
 	</section>
         <script>
             function redirectToWinnerReceipt(bidWinnerId, liveStockId) {
-                return window.location = `<?php echo $BASE_URL?>/bid_receipt.php?bidWinnerId=${bidWinnerId}&liveStockId=${liveStockId}`;
+                return window.location = `<?php echo $BASE_URL?>/bid_receipt.php?bidWinnerId=${bidWinnerId}&liveStockId=${liveStockId}&user_role=BIDDER`;
             }
         </script>
 </body>

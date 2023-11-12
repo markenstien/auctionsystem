@@ -1,6 +1,5 @@
 <?php
-	session_start();
-	require './php/db.php';
+    require './php/db.php';
     require './functions/functions.php';
 ?>
 <!DOCTYPE html>
@@ -9,97 +8,59 @@
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 	<title> Admin Dashboard | EZauction </title>
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" 
-    rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 	<!-- custom css file link  -->
 	<link rel="stylesheet" href="css/seller_dashboard.css">
-
 	<!-- Boxiocns CDN Link -->
 	<link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
 	<!----===== Iconscout CSS ===== -->
 	<link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
-	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Bootstrap -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" 
+    rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
 <?php
-	include_once('include/admin_nav.php')?>
+	session_start();
+    include_once('include/admin_nav.php')?>
 	<section class="dashboard">
 		<div class="top">
 			<i class="uil uil-bars sidebar-toggle"></i>
+
 			<img src="Images/<?=$_SESSION['image']?>" alt="">
 		</div>
 
-		<div class="dash-content">
-			<div class="overview">
-				<div class="title">
-					<span class="text">Admin Dashboard</span>
-				</div>
+        <div class="dash-content">
+            <div class="overview">
+                <div class="title">
+                    <span class="text">Reports</span>
+                    <p>Commissions and Sales</p>
+                </div>
+            </div>
 
-				<div class="boxes">
-					<div class="box box1">
-						<i class='bx bx-user'></i>
-						<span class="text">Total Bidder</span>
-						<?php
-							require './php/db.php';
-							$query = "SELECT id FROM bidder_tbl";
-							$query_run = mysqli_query($conn, $query);
-							$row = mysqli_num_rows($query_run);
-							echo '<span class="number">' .$row. '</span>';
-						?>
-					</div>
+            <div class="content">
+                <?php if(!isset($_POST['btn_generate_report'])) :?>
+                <div style="width: 300px;">
+                    <form action="" method="post">
+                        <div class="form-group">
+                            <label for="start_date">Start Date</label>
+                            <input type="date" name="start_date" id="start_date" class="form-control">
+                        </div>
 
-					<div class="box box2">
-						<i class='bx bx-donate-heart'></i>
-						<span class="text">Total Seller</span>
-						<?php
-							require './php/db.php';
-							$query = "SELECT id FROM seller_tbl";
-							$query_run = mysqli_query($conn, $query);
-							$row = mysqli_num_rows($query_run);
-							echo '<span class="number">' .$row. '</span>';
-						?>
-					</div>
+                        <div class="form-group">
+                            <label for="end_date">End Date</label>
+                            <input type="date" name="end_date" id="end_date" class="form-control">
+                        </div>
 
-					<div class="box box3">
-						<i class='bx bx-user-voice' ></i>
-						<span class="text">Total Auction</span>
-						<?php
-							require './php/db.php';
-							$query = "SELECT id FROM livestock_tbl";
-							$query_run = mysqli_query($conn, $query);
-							$row = mysqli_num_rows($query_run);
-							echo '<span class="number">' .$row. '</span>';
-						?>
-					</div>
-				</div>
-			</div>
+                        <div class="form-group mt-3">
+                            <input type="submit" class="btn btn-primary btn-sm" value="Generate Report" name="btn_generate_report">
+                        </div>
+                    </form>
+                </div>
+                <?php endif?>
 
-			<div class="section">
-				<?php if(!isset($_POST['btn_generate_report'])) :?>
-					<div>
-						<form action="" method="post">
-							<div style="display: flex; flex-direction:row">
-								<div class="form-group">
-									<label for="start_date" style="display: block;">Start Date</label>
-									<input type="date" name="start_date" id="start_date" class="form-control">
-								</div>
-
-								<div class="form-group">
-									<label for="end_date" style="display: block;">End Date</label>
-									<input type="date" name="end_date" id="end_date" class="form-control">
-								</div>
-
-								<div class="form-group mt-3">
-									<label for="#" style="display: block;">Submit button</label>
-									<input type="submit" class="btn btn-primary btn-sm" value="Generate Report" name="btn_generate_report">
-								</div>
-							</div>
-						</form>
-					</div>
-				<?php endif?>
-				<?php if(isset($_POST['btn_generate_report'])) :?>
+                <?php if(isset($_POST['btn_generate_report'])) :?>
                     <?php
                         $startDate = $_POST['start_date'];
                         $endDate = $_POST['end_date'];
@@ -128,18 +89,18 @@
                             <a href="admin_report_print.php?start_date=<?php echo $_POST['start_date']?>&end_date=<?php echo $_POST['end_date']?>">Generate Report</a> | 
                             <a href="admin_report.php">Show Form</a>
                         </div>
-						<?php if(!empty($commissions)) :?>
-						<div class="card-body">
-							<div style="height: 600px;">
-								<h4>Net Commission Chart</h4>
-								<canvas id="myBar"></canvas>
-							</div>
-						</div>
-						<?php endif?>
+
                         <div class="card-body">
                             <?php if(empty($commissions)) :?>
                                 <p>No Commissions Found.</p>
                             <?php else:?>
+                                <div class="card-body">
+                                    <div style="height: 600px;">
+                                        <h4>Net Commission Chart</h4>
+                                        <canvas id="myBar"></canvas>
+                                    </div>
+                                </div>
+                                
                                 <div class="table-responsive">
                                     <table class="table table-bordered">
                                         <thead>
@@ -183,31 +144,28 @@
                         </div>
                     </div>
                 <?php endif?>
-			</div>
-		</div>
+            </div>
+        </div>
 	</section>
-	<?php
-		if(isset($_POST['btn_generate_report'])){
-			$pieLabels = [];
-			$pieValues = [];
+    <?php
+		$pieLabels = [];
+		$pieValues = [];
 
-			$barLabels = [];
-			$barValues = [];
+		$barLabels = [];
+		$barValues = [];
 
-			foreach($commissions as $key => $row) {
-				if(!isset($pieLabels[$row['livestock_id']])) {
-					$pieLabels[$row['livestock_id']] = $row['name'];
-					$pieValues[$row['livestock_id']] = $row['pm_net_amount'];
-				} else {
-					$pieValues[$row['livestock_id']] .= $row['pm_net_amount'];
-				}
+		foreach($commissions as $key => $row) {
+			if(!isset($pieLabels[$row['livestock_id']])) {
+				$pieLabels[$row['livestock_id']] = $row['name'];
+				$pieValues[$row['livestock_id']] = $row['pm_net_amount'];
+			} else {
+				$pieValues[$row['livestock_id']] .= $row['pm_net_amount'];
 			}
 		}
+
 	?>
-    <script src="js/seller_dashboard.js"></script>
-	<?php if(isset($_POST['btn_generate_report']) && !empty($commissions)) :?>
+
     <script>
-		const charCtx = document.getElementById('myChart');
 		const barCtx = document.getElementById('myBar');
 			let pieLabels = ['<?php echo implode("','", $pieLabels)?>'];
 			let pieValues =['<?php echo implode("','", $pieValues)?>'];
@@ -227,6 +185,5 @@
 				}
 			});
 	</script>
-	<?php endif?>
 </body>
 </html>

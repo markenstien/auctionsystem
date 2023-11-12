@@ -20,6 +20,12 @@
 			} 
 		}
   	}
+
+	$message = $_SESSION['message'] ?? '';
+
+	if(!empty($message)) {
+		$_SESSION['message'] = '';
+	}
 ?>
 
 <!DOCTYPE html>
@@ -61,11 +67,13 @@
 	<section class="dashboard">
 		<div class="top">
 			<i class="uil uil-bars sidebar-toggle"></i>
-
 			<img src="Images/<?=$_SESSION['image']?>" alt="">
 		</div>
 
 		<div class="container">
+			<?php if(!empty($message)) :?>
+				<p><?php echo $message?></p>
+			<?php endif?>
 			<div class="table-responsive">
 			<table class="table table-hover text-center">
 				<thead class="table-dark">
@@ -147,7 +155,7 @@
 	<script src="js/seller_dashboard.js"></script>
 	<script defer>
 		function redirectToWinnerReceipt(bidWinnerId, liveStockId) {
-			return window.location = `<?php echo $BASE_URL?>/bid_receipt.php?bidWinnerId=${bidWinnerId}&liveStockId=${liveStockId}`;
+			return window.location = `<?php echo $BASE_URL?>/bid_receipt.php?bidWinnerId=${bidWinnerId}&liveStockId=${liveStockId}&user_role=SELLER`;
 		}
 	</script>
 </body>

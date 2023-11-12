@@ -53,16 +53,16 @@ div#stream-controls button {
         <button id="camera-btn"><i class="fa-solid fa-video"></i></button>
       <?php endif; ?>
       <button id="leave-btn"><i class="fa-solid fa-phone"></i></button>
-      <!-- <a target="_blank" href="http://localhost/EZauction/live-api/" id="fullscreen_btn"><i class="fa-solid fa-expand"></i></a> -->
+      <a target="_blank" href="http://localhost/thesis/EZauction/live-api/" id="fullscreen_btn"><i class="fa-solid fa-expand"></i></a>
     </div>
   </div>
 </body>
 <script src="https://download.agora.io/sdk/release/AgoraRTC_N.js"></script>
 <script src="AgoraRTC_N-4.7.3.js"></script>
 <script>
-  // fullscreen_btn.onclick = () => {
-  //   window.location = 'http://localhost/EZauction/live-api/';
-  // }
+  fullscreen_btn.onclick = () => {
+    window.location = 'http://localhost/thesis/EZauction/live-api/';
+  }
   const checking = () => {
     setInterval(() => {
       let listView = document.querySelectorAll('.video-container');
@@ -75,9 +75,10 @@ div#stream-controls button {
     }, 100);
   }
 
-  const APP_ID = "7bd6baeef74341a0b8fc287d35d3030b";
-  const TOKEN =
-    "007eJxTYDiw49ItLs7rATJR1Xv2Sl1xj3/7+oKZpLVM19996eufL4pVYDBPSjFLSkxNTTM3MTYxTDRIskhLNrIwTzE2TTE2MDZImnrQNLUhkJHBa6IvAyMUgvgcDK5RoY4hnv5+DAwASHgheQ==";
+  const APP_ID = "8a9b38e9a88948f7be4af9c6f83c4220";
+  const TOKEN  = '2XnbhVAPAy0OC1kCZuhMUeIMiP5_5BLqmvMfFL7atgs1oqzP8';
+  // const TOKEN =
+  //   "007eJxTYDiw49ItLs7rATJR1Xv2Sl1xj3/7+oKZpLVM19996eufL4pVYDBPSjFLSkxNTTM3MTYxTDRIskhLNrIwTzE2TTE2MDZImnrQNLUhkJHBa6IvAyMUgvgcDK5RoY4hnv5+DAwASHgheQ==";
   const CHANNEL = "EZUATION";
 
   const client = AgoraRTC.createClient({

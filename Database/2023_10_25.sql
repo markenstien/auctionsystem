@@ -23,3 +23,13 @@ CREATE TABLE commissions(
 
 ALTER TABLE bidding_tbl
     add column is_sent boolean default false;
+
+
+ALTER TABLE payments
+    add column livestock_id int(10);
+
+
+truncate payments;
+truncate commissions;
+truncate bidding_tbl;
+truncate livestock_tbl;
