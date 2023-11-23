@@ -103,20 +103,44 @@
 						// WHERE `seller_id` ='$seller_id'
 						// GROUP BY a.id";
 
-						$sql = "SELECT a.*, a.id as livestock_id , max_bids.winnerAmmount, max_bids.bid_status,
-						max_bids.is_sent, max_bids.bid_winner_id, b.fname as fname,c.address,c.phone
-						FROM `livestock_tbl` as a 
-						LEFT JOIN (
-							SELECT is_sent,bid_status,bidding_tbl.id as bid_winner_id, bid_livestock_id, MAX(bid_amount) as winnerAmmount
-							FROM bidding_tbl
-							GROUP BY bid_livestock_id
-						) as max_bids
-						ON a.id = max_bids.bid_livestock_id
-						LEFT JOIN bidding_tbl as b
-						ON a.id = b.bid_livestock_id AND b.bid_amount = max_bids.winnerAmmount
-						LEFT JOIN bidding_access as c 
-						ON b.bidder_id = c.bidder
-						WHERE a.`seller_id`='$seller_id' 
+						$FETCH_HIGHEST_BIDDER_SQL = "
+							SELECT bid_livestock_id, max(bid_amount) as bid_winner_amount
+								FROM bidding_tbl
+								GROUP BY bid_livestock_id
+						";
+						
+						$result = mysqli_query($conn, $FETCH_HIGHEST_BIDDER_SQL);
+						/**
+						 * FETCH BID WINNERS
+						 * THIS QUERY IS USED TO FETCH THE ID OF BIDDING
+						 */
+						$livestockWinners = [];
+						while ($row = mysqli_fetch_assoc($result)) {
+							$livestockWinners[] = $row;						
+						}
+
+						$bidWinnerIds = [];
+						foreach($livestockWinners as $key => $row) {
+							$sql = "SELECT * FROM bidding_tbl
+								WHERE bid_livestock_id = '{$row['bid_livestock_id']}'
+									AND bid_amount = '{$row['bid_winner_amount']}'";
+							$result = mysqli_query($conn, $sql);
+							$bidWinnerIds[] = mysqli_fetch_assoc($result)['id'];
+						}
+
+						$sql = "
+							SELECT livestock.*, livestock.id as livestock_id, bid_amount as winnerAmmount, bid_livestock_id,
+							bid_status, is_sent, bidding_tbl.id as bid_winner_id, bidding_tbl.fname as fname, bidding_access.address, bidding_access.phone
+								FROM bidding_tbl
+									LEFT JOIN 
+										livestock_tbl as livestock
+										ON livestock.id = bidding_tbl.bid_livestock_id
+									
+									LEFT JOIN bidding_access
+										ON bidding_tbl.bidder_id = bidding_access.bidder
+										WHERE livestock.seller_id = '{$seller_id}'
+										AND bidding_tbl.id in (".implode(',', $bidWinnerIds).")
+
 						";
 
 						$result = mysqli_query($conn, $sql);

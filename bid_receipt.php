@@ -30,7 +30,8 @@
 
 	$bidWinner = getSingle($conn, "
 		SELECT * FROM bidding_tbl
-			WHERE id = '{$bidId}' 
+			WHERE id = '{$bidId}
+			ORDER BY bid_amount desc' 
 	");
 
 	$liveStock = getSingle($conn, "
